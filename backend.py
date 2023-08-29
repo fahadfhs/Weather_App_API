@@ -7,6 +7,8 @@ def get_data(place, forecast_days=None):
     url = f"http://api.openweathermap.org/data/2.5/forecast?q={place}&appid={API_KEY}"
     response = requests.get(url)
     data = response.json()
+    # the reason we get data['list'] is because list is a dictionary with about 40 odd dictionaries
+    # which contains the values of many tings which we need to extract.
     filtered_data = data['list']
     nr_values = 8 * forecast_days
     filtered_data = filtered_data[:nr_values]
